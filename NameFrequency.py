@@ -19,7 +19,7 @@ class NameFrequency:
         data = pd.read_csv(file_name)
         data.dropna(inplace=True)
         data_frame = dict(data[column_name].str.split(" ", n=1, expand=True))
-        self.data_frame = data_frame
+        self.data_frame[column_name] = data_frame
         if isinstance(self.data_frame, pd.DataFrame):
             return True
         return False
@@ -36,7 +36,8 @@ class NameFrequency:
         self.plot_group1 = self.data_set.groupby([column_name1]).size().reset_index(name='counts').sort_values('counts',
                                                                                                                ascending=False).head(
             20)
-        self.plot_group2 = self.data_set.groupby([column_name2]).size().reset_index(name='counts').sort_values('counts',                                                                                                               ascending=False).head(
+        self.plot_group2 = self.data_set.groupby([column_name2]).size().reset_index(name='counts').sort_values('counts',
+                                                                                                               ascending=False).head(
             20)
         return True
 
@@ -65,7 +66,7 @@ class NameFrequency:
                 print("Not an Integer! Try again.")
                 continue
             else:
-                if userInput not in [0,1]:
+                if userInput not in [0, 1]:
                     print("Index does not exist! Try again.")
                     continue
                 return userInput
@@ -91,6 +92,3 @@ class NameFrequency:
             else:
                 return userInput
                 break
-
-
-
